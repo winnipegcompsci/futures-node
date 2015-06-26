@@ -8,8 +8,6 @@ var mongoose = require('mongoose'),
 	Exchange = mongoose.model('Exchange'),
 	_ = require('lodash');
     
-var https = require('https');
-var http = require('http');
     
 /**
  * Create a Exchange

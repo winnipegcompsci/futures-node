@@ -171,7 +171,7 @@ module.exports = function(grunt) {
 		grunt.config.set('applicationJavaScriptFiles', config.assets.js);
 		grunt.config.set('applicationCSSFiles', config.assets.css);
 	});
-
+   
 	// Default task(s).
 	grunt.registerTask('default', ['lint', 'copy:localConfig', 'concurrent:default']);
 
@@ -191,4 +191,15 @@ module.exports = function(grunt) {
 	grunt.registerTask('test', ['copy:localConfig', 'test:server', 'test:client']);
 	grunt.registerTask('test:server', ['env:test', 'mochaTest']);
 	grunt.registerTask('test:client', ['env:test', 'karma:unit']);
+    
+    grunt.registerTask('updateTickers', 'Adds New Ticker Object For Each Exchange', function updateMe() {
+        var util = require('util');
+        var mongoose = require('mongoose')
+               
+        exchanges = Exchange.find();
+        
+        grunt.log.writeln("ITEM: " + util.inspect(exchanges));
+        
+        setTimeout(updateMe, 10 * 1000);
+    });
 };

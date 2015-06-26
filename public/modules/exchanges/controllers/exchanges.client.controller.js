@@ -69,12 +69,11 @@ angular.module('exchanges').controller('ExchangesController', ['$scope', '$state
         
         $scope.currentPrice = function(exchange) {    
             if(exchange.name.toUpperCase() == "OKCOIN") {
-                
-                
+               
             } // end if OKCOIN
             
             if(exchange.name.toUpperCase() == "796") {
-            
+
             } // end of 796.
             
             return "N/A";
