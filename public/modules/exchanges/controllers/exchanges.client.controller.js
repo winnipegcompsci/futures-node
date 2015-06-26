@@ -4,12 +4,14 @@
 angular.module('exchanges').controller('ExchangesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Exchanges',
 	function($scope, $stateParams, $location, Authentication, Exchanges) {
 		$scope.authentication = Authentication;
-
+        
 		// Create new Exchange
 		$scope.create = function() {
 			// Create new Exchange object
 			var exchange = new Exchanges ({
-				name: this.name
+				name: this.name,
+                apikey: this.apikey,
+                secretkey: this.secretkey,
 			});
 
 			// Redirect after save
@@ -18,6 +20,8 @@ angular.module('exchanges').controller('ExchangesController', ['$scope', '$state
 
 				// Clear form fields
 				$scope.name = '';
+                $scope.apikey = '';
+                $scope.secretkey = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -50,7 +54,7 @@ angular.module('exchanges').controller('ExchangesController', ['$scope', '$state
 				$scope.error = errorResponse.data.message;
 			});
 		};
-
+        
 		// Find a list of Exchanges
 		$scope.find = function() {
 			$scope.exchanges = Exchanges.query();
@@ -62,5 +66,19 @@ angular.module('exchanges').controller('ExchangesController', ['$scope', '$state
 				exchangeId: $stateParams.exchangeId
 			});
 		};
+        
+        $scope.currentPrice = function(exchange) {    
+            if(exchange.name.toUpperCase() == "OKCOIN") {
+                
+                
+            } // end if OKCOIN
+            
+            if(exchange.name.toUpperCase() == "796") {
+            
+            } // end of 796.
+            
+            return "N/A";
+        };
+        
 	}
 ]);

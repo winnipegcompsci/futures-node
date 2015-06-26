@@ -7,16 +7,23 @@ var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Exchange = mongoose.model('Exchange'),
 	_ = require('lodash');
-
+    
+var https = require('https');
+var http = require('http');
+    
 /**
  * Create a Exchange
  */
 exports.create = function(req, res) {
+    console.log("Create() called");
 	var exchange = new Exchange(req.body);
 	exchange.user = req.user;
-
+    
+    var util = require('util');
+    
 	exchange.save(function(err) {
 		if (err) {
+            console.log("Error: " + err);
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
@@ -105,3 +112,7 @@ exports.hasAuthorization = function(req, res, next) {
 	}
 	next();
 };
+
+exports.getCurrentPrice = function(req, res) {
+    return 'T1';
+}

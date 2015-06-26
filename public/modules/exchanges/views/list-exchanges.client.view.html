@@ -2,15 +2,21 @@
     <div class="page-header">
         <h1>Exchanges</h1>
     </div>
-    <div class="list-group">
+    <div class="list-group" id="list-group">
         <a data-ng-repeat="exchange in exchanges" data-ng-href="#!/exchanges/{{exchange._id}}" class="list-group-item">
 			<small class="list-group-item-text">
-				Posted on
+				Added on
 				<span data-ng-bind="exchange.created | date:'medium'"></span>
 				by
 				<span data-ng-bind="exchange.user.displayName"></span>
 			</small>
+            <h4 class="pull-right">
+                <span data-ng-bind="currentPrice(exchange)"> N/A </span>
+                <i class="fa fa-arrow-up fa-lg text-success"></i>
+            </h4>
+            
 			<h4 class="list-group-item-heading" data-ng-bind="exchange.name"></h4>
+
         </a>
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!exchanges.$resolved || exchanges.length">

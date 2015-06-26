@@ -1,6 +1,8 @@
 <section data-ng-controller="ExchangesController" data-ng-init="findOne()">
 	<div class="page-header">
 		<h1 data-ng-bind="exchange.name"></h1>
+        <h4 class="text-info"> API Key: <small data-ng-bind="exchange.apikey"> </small> </h4>
+        <h4 class="text-info"> Secret Key: <small data-ng-bind="exchange.secretkey"></small></h4>
 	</div>
 	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == exchange.user._id))">
 		<a class="btn btn-primary" href="/#!/exchanges/{{exchange._id}}/edit">
@@ -12,7 +14,7 @@
 	</div>
 	<small>
 		<em class="text-muted">
-			Posted on
+			Added on
 			<span data-ng-bind="exchange.created | date:'mediumDate'"></span>
 			by
 			<span data-ng-bind="exchange.user.displayName"></span>
