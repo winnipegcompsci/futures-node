@@ -194,11 +194,17 @@ module.exports = function(grunt) {
     
     grunt.registerTask('updateTickers', 'Adds New Ticker Object For Each Exchange', function updateMe() {
         var util = require('util');
-        var mongoose = require('mongoose')
-               
-        exchanges = Exchange.find();
+        var mongoose = require('mongoose');
         
-        grunt.log.writeln("ITEM: " + util.inspect(exchanges));
+        mongoose.model('Exchange', new mongoose.Schema());
+        mongoose.connect('mongodb://localhost/futuresapp');
+        
+        var Exchange = mongoose.model('Exchange');
+        var exchanges = Exchange.find();
+        
+        exchanges.forEach(function (exchg) { 
+            grunt.log.writeln("Updating Exchange: " + util.inspect(exchg.name) + "...");
+        });
         
         setTimeout(updateMe, 10 * 1000);
     });

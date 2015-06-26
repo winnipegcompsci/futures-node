@@ -114,3 +114,4 @@ exports.hasAuthorization = function(req, res, next) {
 exports.getCurrentPrice = function(req, res) {
     return 'T1';
 }
+
