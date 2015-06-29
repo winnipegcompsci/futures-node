@@ -15,8 +15,13 @@ var TickerSchema = new Schema({
         default: Date.now,
     },
     exchange: {
-        type: Schema.ObjectId,
-        ref: 'Exchange',
+        // type: Schema.ObjectId,
+        // ref: 'Exchange',
+        
+        type: String,
+        default: '',
+        required: 'Which Exchange Provided this Ticker?',
+        trim: true,
     },
     buy: {
         type: String,

@@ -192,6 +192,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('test:server', ['env:test', 'mochaTest']);
 	grunt.registerTask('test:client', ['env:test', 'karma:unit']);
     
+    /*
     grunt.registerTask('updateTickers', 'Adds New Ticker Object For Each Exchange', function updateMe() {
         var util = require('util');
         var mongoose = require('mongoose');
@@ -208,4 +209,5 @@ module.exports = function(grunt) {
         
         setTimeout(updateMe, 10 * 1000);
     });
+    */
 };

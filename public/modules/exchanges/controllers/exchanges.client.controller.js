@@ -67,17 +67,45 @@ angular.module('exchanges').controller('ExchangesController', ['$scope', '$state
 			});
 		};
         
-        $scope.currentPrice = function(exchange) {    
-            if(exchange.name.toUpperCase() == "OKCOIN") {
-               
-            } // end if OKCOIN
+        $scope.currentPrice = function(exchange) {
             
-            if(exchange.name.toUpperCase() == "796") {
+            
+            MongoClient.connect("mongodb://localhost/futuresapp", function(err, db) {
+                alert('Connecting');
+                
+                if(err) {
+                    alert('Error: ' + err);
+                    return "Err";
+                }
+    
+    
+                alert('No Errors');
+                var tickers = db.collection('tickers');
+            
+                if(exchange.name.toUpperCase() == "OKCOIN") {
+                    alert('Finding OKC Price');
+                    conditions.exchange = "okcoin";
+                } // end if OKCOIN
+            
+                if(exchange.name.toUpperCase() == "796") {
+                    alert('Finding 796 Price');
+                    
+                    conditions.exchange = "796";
+                } // end of 796.
+            
+            
+                lastPrice = db.tickers.findOne(conditions).sort({date:-1});   // Add Sort by Timestamp Desc?
+                
+                alert('Last Price: ' + lastPrice);
+                
+                console.log("LAST PRICE: " + require('util').inspect(lastPrice));
+                return lastPrice.last;
+                
+            
+            });
 
-            } // end of 796.
-            
-            return "N/A";
-        };
+            return "FT";   // Default
+        }   // end of currentPrice().
         
 	}
 ]);

@@ -3,20 +3,25 @@
         <h1>Exchanges</h1>
     </div>
     <div class="list-group" id="list-group">
-        <a data-ng-repeat="exchange in exchanges" data-ng-href="#!/exchanges/{{exchange._id}}" class="list-group-item">
-			<small class="list-group-item-text">
-				Added on
-				<span data-ng-bind="exchange.created | date:'medium'"></span>
-				by
-				<span data-ng-bind="exchange.user.displayName"></span>
-			</small>
-            <h4 class="pull-right">
-                <span data-ng-bind="currentPrice(exchange)"> N/A </span>
-                <i class="fa fa-arrow-up fa-lg text-success"></i>
-            </h4>
+        <a data-ng-repeat="exchange in exchanges" data-ng-href="#!/exchanges/{{exchange._id}}" class="list-group-item">           
+            <section data-ng-controller="TickersController" data-ng-init="getLastPrice(exchange.name)">              
+            	<small class="list-group-item-text">
+                (24-Hour Volume: <span data-ng-bind="lastVolume"></span>,
+                24-Hour Average Price: <span data-ng-bind="averagePrice"></span>)
+                </small>
+
+                <h4 class="pull-right">
+                    <!-- <small class="text-info" style="margin-right: 100px">
+                        (Volume: <span data-ng-bind="lastVolume"> Vol </span>)
+                    </small> -->
+                    
+                    Current Price: <span data-ng-bind="lastPrice"> Err </span>
+                    <i ng-class="directionClass"></i>
+                </h4>
+                
+            </section>
             
 			<h4 class="list-group-item-heading" data-ng-bind="exchange.name"></h4>
-
         </a>
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!exchanges.$resolved || exchanges.length">

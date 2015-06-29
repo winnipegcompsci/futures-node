@@ -22,6 +22,7 @@ var fs = require('fs'),
 	flash = require('connect-flash'),
 	config = require('./config'),
 	consolidate = require('consolidate'),
+    util = require('util'),
 	path = require('path');
 
 module.exports = function(db) {
