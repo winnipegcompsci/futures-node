@@ -4,8 +4,9 @@
     </div>
     <div class="list-group" id="list-group">
         <a data-ng-repeat="exchange in exchanges" data-ng-href="#!/exchanges/{{exchange._id}}" class="list-group-item">           
+            
             <section data-ng-controller="TickersController" data-ng-init="getLastPrice(exchange.name)">              
-            	<small class="list-group-item-text">
+            	<small class="text-info text-center list-group-item-text">
                 (24-Hour Volume: <span data-ng-bind="lastVolume"></span>,
                 24-Hour Average Price: <span data-ng-bind="averagePrice"></span>)
                 </small>
@@ -21,7 +22,8 @@
                 
             </section>
             
-			<h4 class="list-group-item-heading" data-ng-bind="exchange.name"></h4>
+            <h3 class="list-group-item-heading" data-ng-bind="exchange.name"></h3>
+            
         </a>
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!exchanges.$resolved || exchanges.length">

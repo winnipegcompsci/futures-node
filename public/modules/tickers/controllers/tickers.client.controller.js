@@ -68,7 +68,7 @@ angular.module('tickers').controller('TickersController', ['$scope', '$statePara
                     if(tick.exchange == exchangeName.toLowerCase()) {
                         if(Number(tick.last) > Number(sum / currentIndex)) {
                             $scope.directionClass = "fa fa-arrow-up fa-lg text-success";
-                        } else if (Number(tick.last) === Number(sum / currentIndex)) {
+                        } else if (Number(tick.last).toFixed(2) == Number(sum / currentIndex).toFixed(2)) {
                             $scope.directionClass = "fa fa-minus fa-lg text-warning";
                         } else {
                             $scope.directionClass = "fa fa-arrow-down fa-lg text-danger";
@@ -92,8 +92,45 @@ angular.module('tickers').controller('TickersController', ['$scope', '$statePara
             
         };
         
-        
+        $scope.getDayChartData = function() {            
+            var data_okcoin = { data: [], timestamps: []};
+            var data_seven = { data: [], timestamps: []};
+            var data_bitvc = { data: [], timestamps: []};
+            
+            
+            Tickers.query({
+                "timestamp" : { $gte : new Date().setUTCHours(0, 0, 0, 0) }
+            }, function(ticks) {
+                ticks.forEach(function (tick) {
+                    if(tick.exchange == "okcoin") {
+                        data_okcoin.data.push(Number(tick.last).toFixed(2));
+                        data_okcoin.timestamps.push(tick.timestamp.last);
+                    }
+                    
+                    if(tick.exchange == "796") {
+                        data_seven.data.push(Number(tick.last).toFixed(2));
+                        data_seven.timestamps.push(tick.timestamp);
+                    }
+                    
+                    if(tick.exchange == "bitvc") {
+                        data_bitvc.data.push(Number(tick.last).toFixed(2));
+                        data_seven.timestamps.push(tick.timestamp);
+                    }               
+                });
                 
+                $scope.chartData = {
+                    okcoin: data_okcoin,
+                    seven: data_seven,
+                    bitvc: data_bitvc,
+                };
+                
+                buildChart($scope.chartData);   // Call The Build Chart Function.
+            });
+            
+
+            
+        }
+                        
 		// Find existing Ticker
 		$scope.findOne = function() {
 			$scope.ticker = Tickers.get({ 

@@ -99,9 +99,6 @@ function update796Ticker() {
 function updateBitVCTicker() {
     console.log("Getting BitVC Ticker");
     
-
-
-    
     MongoClient.connect("mongodb://localhost/futuresapp", function(err, db) {
         if(err) {
             return console.log('Error: ' + err); 
@@ -147,8 +144,6 @@ function updateBitVCTicker() {
                 
             });
         });
-    
-
     
     });    
     
