@@ -2,4 +2,3 @@
 
 // Use applicaion configuration module to register a new module
 ApplicationConfiguration.registerModule('strategies');
-ApplicationConfiguration.registerModule('mongoose');

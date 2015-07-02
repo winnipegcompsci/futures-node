@@ -4,11 +4,11 @@
  * Module dependencies.
  */
  
-
  
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Strategy = mongoose.model('Strategy'),
+    Exchange = mongoose.model('Exchange'),                  // DEBUG
 	_ = require('lodash');
 
 /**
@@ -85,6 +85,20 @@ exports.list = function(req, res) {
 			res.jsonp(strategies);
 		}
 	});
+};
+
+exports.getExchanges = function (req, res) {
+    console.log("Getting Exchanges"); 
+    
+    Exchange.find().exec(function(err, exchanges) {
+        if(err) {
+            return res.status(400).send({
+                message: errorHandler.getErrorMessage(err)
+            });
+        } else {
+            res.jsonp(exchanges);
+        }
+    });
 };
 
 /**

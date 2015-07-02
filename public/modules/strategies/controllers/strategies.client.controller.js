@@ -3,14 +3,11 @@
 // Strategies controller
 angular.module('strategies').controller('StrategiesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Strategies',
 	function($scope, $stateParams, $location, Authentication, Strategies) {
-		$scope.authentication = Authentication;
+        $scope.authentication = Authentication;
         
-        $scope.exchanges = angular.module('ExchangesController', function($scope, $window) {
-            console.log("Executing Exchanges Controller?");
-            $scope.exchanges = Exchanges.find();
-        });
-        
-		// Create new Strategy
+        // var Exchange = angular.module('exchanges').controller('ExchangesController', ['Exchanges']);
+		
+        // Create new Strategy
 		$scope.create = function() {
 			// Create new Strategy object
 			var strategy = new Strategies ({
