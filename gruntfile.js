@@ -1,6 +1,7 @@
 'use strict';
 
 var fs = require('fs');
+var util = require('util');
 
 module.exports = function(grunt) {
 	// Unified Watch Object
@@ -160,6 +161,7 @@ module.exports = function(grunt) {
 	// Load NPM tasks
 	require('load-grunt-tasks')(grunt);
 
+    
 	// Making grunt default to force in order not to break the project.
 	grunt.option('force', true);
 
@@ -190,24 +192,11 @@ module.exports = function(grunt) {
 	// Test task.
 	grunt.registerTask('test', ['copy:localConfig', 'test:server', 'test:client']);
 	grunt.registerTask('test:server', ['env:test', 'mochaTest']);
-	grunt.registerTask('test:client', ['env:test', 'karma:unit']);
-    
-    /*
-    grunt.registerTask('updateTickers', 'Adds New Ticker Object For Each Exchange', function updateMe() {
-        var util = require('util');
-        var mongoose = require('mongoose');
-        
-        mongoose.model('Exchange', new mongoose.Schema());
-        mongoose.connect('mongodb://localhost/futuresapp');
-        
-        var Exchange = mongoose.model('Exchange');
-        var exchanges = Exchange.find();
-        
-        exchanges.forEach(function (exchg) { 
-            grunt.log.writeln("Updating Exchange: " + util.inspect(exchg.name) + "...");
-        });
-        
-        setTimeout(updateMe, 10 * 1000);
+	grunt.registerTask('test:client', ['env:test', 'karma:unit']);    
+       
+    grunt.registerTask('giveadvice', 'Gives Advice Based on Current Prices', function() {
+        grunt.log.writeln("Checking for New Advice at: " + new Date() );
+      
+        grunt.log.writeln("Done Checking for New Advice at: " + new Date() );
     });
-    */
 };

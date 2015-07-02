@@ -42,7 +42,6 @@ function updateOKCTicker() {
                     contract_id: ticker.ticker.contract_id
                 });
                 
-                console.log("Inserted OKCOIN LTP: " + ticker.ticker.last + " (volume: " + ticker.ticker.vol + ")");
             });
             
             
@@ -77,12 +76,12 @@ function update796Ticker() {
                 tickers.insert({
                     exchange: "796",
                     timestamp: ticker.LAST_TIMESTAMP,
-                    buy: ticker.ticker.buy,
-                    high: ticker.ticker.high,
-                    last: ticker.ticker.last,
-                    low: ticker.ticker.low,
-                    sell: ticker.ticker.sell,
-                    volume: ticker.ticker.vol,
+                    buy: Number(ticker.ticker.buy),
+                    high: Number(ticker.ticker.high),
+                    last: Number(ticker.ticker.last),
+                    low: Number(ticker.ticker.low),
+                    sell: Number(ticker.ticker.sell),
+                    volume: Number(ticker.ticker.vol),
                 });
                 
                 console.log("Inserted 796 LTP: " + ticker.ticker.last + " (volume: " + ticker.ticker.vol + ")");

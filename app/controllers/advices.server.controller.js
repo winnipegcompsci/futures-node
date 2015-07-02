@@ -3,107 +3,104 @@
 /**
  * Module dependencies.
  */
- 
-
- 
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
-	Strategy = mongoose.model('Strategy'),
+	Advice = mongoose.model('Advice'),
 	_ = require('lodash');
 
 /**
- * Create a Strategy
+ * Create a Advice
  */
 exports.create = function(req, res) {
-	var strategy = new Strategy(req.body);
-	strategy.user = req.user;
+	var advice = new Advice(req.body);
+	advice.user = req.user;
 
-	strategy.save(function(err) {
+	advice.save(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(strategy);
+			res.jsonp(advice);
 		}
 	});
 };
 
 /**
- * Show the current Strategy
+ * Show the current Advice
  */
 exports.read = function(req, res) {
-	res.jsonp(req.strategy);
+	res.jsonp(req.advice);
 };
 
 /**
- * Update a Strategy
+ * Update a Advice
  */
 exports.update = function(req, res) {
-	var strategy = req.strategy ;
+	var advice = req.advice ;
 
-	strategy = _.extend(strategy , req.body);
+	advice = _.extend(advice , req.body);
 
-	strategy.save(function(err) {
+	advice.save(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(strategy);
+			res.jsonp(advice);
 		}
 	});
 };
 
 /**
- * Delete an Strategy
+ * Delete an Advice
  */
 exports.delete = function(req, res) {
-	var strategy = req.strategy ;
+	var advice = req.advice ;
 
-	strategy.remove(function(err) {
+	advice.remove(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(strategy);
+			res.jsonp(advice);
 		}
 	});
 };
 
 /**
- * List of Strategies
+ * List of Advices
  */
 exports.list = function(req, res) { 
-	Strategy.find().sort('-created').populate('user', 'displayName').exec(function(err, strategies) {
+	Advice.find().sort('-created').populate('user', 'displayName').exec(function(err, advices) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(strategies);
+			res.jsonp(advices);
 		}
 	});
 };
 
 /**
- * Strategy middleware
+ * Advice middleware
  */
-exports.strategyByID = function(req, res, next, id) { 
-	Strategy.findById(id).populate('user', 'displayName').exec(function(err, strategy) {
+exports.adviceByID = function(req, res, next, id) { 
+	Advice.findById(id).populate('user', 'displayName').exec(function(err, advice) {
 		if (err) return next(err);
-		if (! strategy) return next(new Error('Failed to load Strategy ' + id));
-		req.strategy = strategy ;
+		if (! advice) return next(new Error('Failed to load Advice ' + id));
+		req.advice = advice ;
 		next();
 	});
 };
 
 /**
- * Strategy authorization middleware
+ * Advice authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
-	if (req.strategy.user.id !== req.user.id) {
+	if (req.advice.user.id !== req.user.id) {
 		return res.status(403).send('User is not authorized');
 	}
 	next();

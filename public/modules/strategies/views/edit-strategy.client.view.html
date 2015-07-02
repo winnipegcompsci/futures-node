@@ -11,6 +11,59 @@
                         <input type="text" data-ng-model="strategy.name" id="name" class="form-control" placeholder="Name" required>
                     </div>
                 </div>
+                               
+                
+                <div class="columns col-lg-6">
+                    <div class="form-group">
+                        <label class="control-label" for="primaryExchange">Primary Exchange</label>
+                        <div class="controls">
+                            <select data-ng-model="strategy.primaryExchange" ng-options="exchange.id as exchange.name for exchange in exchanges track by exchange.id"> </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="columns col-lg-6">
+                    <div class="form-group">
+                        <label class="control-label" for="">Insurance Exchange</label>
+                        <div class="controls">
+                            <select data-ng-model="strategy.insuranceExchange" ng-options="exchange.id as exchange.name for exchange in exchanges track by exchange.id"></select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="control-label" for="">Max Amount to Hedge</label>
+                    <div class="controls input-group">
+                        <span class="input-group-addon"><i class="fa fa-btc"></i></span>
+                        <input type="text" data-ng-model="strategy.maxHedge" id="maxHedge" class="form-control" placeholder="Enter Amount in BTC">
+                        <span class="input-group-addon">BTC</span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="control-label" for="">Max Price to Buy At</label>
+                    <div class="controls input-group">
+                        <span class="input-group-addon">$</span>
+                        <input type="text" data-ng-model="strategy.maxBuyPrice" id="maxBuyPrice" class="form-control" placeholder="Enter Max Buy Price">
+                        <span class="input-group-addon">USD</span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="control-label" for="">Target Insurance Coverage Rate</label>
+                    <div class="controls input-group">
+                        <input type="text" data-ng-model="strategy.targetCoverageRate" id="targetCoverageRate" class="form-control" placeholder="Target Insurance Coverage Rate">
+                        <span class="input-group-addon">%</span>
+                    </div>                    
+                </div>
+                
+                <div class="form-group">
+                    <label class="control-label" for="">Auto Trade on Advice</label>
+                    <div class="controls">
+                        <input type="checkbox" data-ng-model="strategy.autoTradeAdvice" id="autoTradeAdvice" class="form-control">
+                    </div>
+                </div>
+                
                 <div class="form-group">
                     <input type="submit" value="Update" class="btn btn-default">
                 </div>

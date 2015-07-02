@@ -10,12 +10,17 @@ var mongoose = require('mongoose'),
  * Notification Schema
  */
 var NotificationSchema = new Schema({
-	name: {
+	type: {
 		type: String,
 		default: '',
-		required: 'Please fill Notification name',
+		required: 'Please fill in Notification type',
 		trim: true
 	},
+    message: {
+        type: String,
+        default: '',
+        required: 'Please fill in Notification message',
+    },
 	created: {
 		type: Date,
 		default: Date.now

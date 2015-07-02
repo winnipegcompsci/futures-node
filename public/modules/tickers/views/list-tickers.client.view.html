@@ -3,25 +3,7 @@
         <h1>Tickers</h1>
     </div>
     <div class="list-group">
-        <a data-ng-repeat="ticker in tickers" data-ng-href="#!/tickers/{{ticker._id}}" class="list-group-item">
-			<small class="list-group-item-text">
-				
-                <div class='pull-left'>
-                    <span data-ng-bind="ticker.date"></span>
-                </div>
-                
-                <div class='text-center text-success'>
-                    <span data-ng-bind="ticker.exchange"></span>
-				</div>
-                
-                <div class='pull-right'>
-                    $
-                    <span data-ng-bind="ticker.last"></span>
-                    (with volume <span data-ng-bind="ticker.volume"></span> )
-                </div>
-			</small>
-			<h4 class="list-group-item-heading" data-ng-bind="ticker.ticker.last"></h4>
-        </a>
+
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!tickers.$resolved || tickers.length">
     	No Tickers yet! Start the watcher to start pulling information  from each exchange.

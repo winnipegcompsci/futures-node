@@ -1,32 +1,37 @@
 <section data-ng-controller="ExchangesController" data-ng-init="find()">
     <div class="page-header">
-        <h1>Exchanges</h1>
+        <h1>Active Exchanges</h1>
     </div>
     <div class="list-group" id="list-group">
         <a data-ng-repeat="exchange in exchanges" data-ng-href="#!/exchanges/{{exchange._id}}" class="list-group-item">           
             
             <section data-ng-controller="TickersController" data-ng-init="getLastPrice(exchange.name)">              
-            	<small class="text-info text-center list-group-item-text">
-                (24-Hour Volume: <span data-ng-bind="lastVolume"></span>,
-                24-Hour Average Price: <span data-ng-bind="averagePrice"></span>)
-                </small>
-
+                <div class='pull-left' data-ng-controller="TickersController" data-ng-init="setLogoURL(exchange.name)">
+                    <img ng-src="{{logourl}}" width=100px height=50px style="padding-right: 20px"/>
+                </div>
+                                
                 <h4 class="pull-right">
-                    <!-- <small class="text-info" style="margin-right: 100px">
-                        (Volume: <span data-ng-bind="lastVolume"> Vol </span>)
-                    </small> -->
-                    
-                    Current Price: <span data-ng-bind="lastPrice"> Err </span>
+                    Current Price: <strong><span data-ng-bind="lastPrice"> Err </span></strong>
                     <i ng-class="directionClass"></i>
+                    
+                    <small>
+                        <br />24 Hour Avg: $<span data-ng-bind="averagePrice"></span>
+                        <br />24 Hour Vol: <span data-ng-bind="lastVolume"></span>
+                    </small>
                 </h4>
                 
-            </section>
-            
-            <h3 class="list-group-item-heading" data-ng-bind="exchange.name"></h3>
-            
+                <h3 class="list-group-item-heading" data-ng-bind="exchange.name"></h3>
+
+                <p><strong>
+                    <span class="text-info"> Balance: 000.00 USD </span> ||
+                    <span class="text-success">Assets: 000.00000 BTC </span> ||
+                    <span class="text-warning">Active Positions: 0</span> ||
+                    <span class="text-info">Insurance: 000.00000 BTC </span>
+                </strong></p>
+            </section>            
         </a>
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!exchanges.$resolved || exchanges.length">
-    	No Exchanges yet, why don't you <a href="/#!/exchanges/create">create one</a>?
+    	No Exchanges yet, why don't you <a href="/#!/exchanges/create">add one to track</a>?
     </div>
 </section>

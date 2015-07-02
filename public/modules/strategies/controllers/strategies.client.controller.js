@@ -4,7 +4,12 @@
 angular.module('strategies').controller('StrategiesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Strategies',
 	function($scope, $stateParams, $location, Authentication, Strategies) {
 		$scope.authentication = Authentication;
-
+        
+        $scope.exchanges = angular.module('ExchangesController', function($scope, $window) {
+            console.log("Executing Exchanges Controller?");
+            $scope.exchanges = Exchanges.find();
+        });
+        
 		// Create new Strategy
 		$scope.create = function() {
 			// Create new Strategy object
@@ -61,6 +66,10 @@ angular.module('strategies').controller('StrategiesController', ['$scope', '$sta
 			$scope.strategy = Strategies.get({ 
 				strategyId: $stateParams.strategyId
 			});
+            
+            buildProfitChart();
+            
+            
 		};
 	}
 ]);

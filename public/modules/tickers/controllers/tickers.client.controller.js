@@ -56,9 +56,25 @@ angular.module('tickers').controller('TickersController', ['$scope', '$statePara
 			$scope.tickers = Tickers.query();
 		};
 
+        $scope.setLogoURL = function(exchangeName) {
+            $scope.logourl = "http://placehold.it/150x100";
+            if(exchangeName.toLowerCase() == 'okcoin') {
+                $scope.logourl = "https://img.okcoin.com/v_20150619001/image/new_v1/logo1.png";
+            } else if (exchangeName.toLowerCase() == '796') {
+                $scope.logourl = "https://796.com/images/theme/en/images/logo.jpg";
+            } else if (exchangeName.toLowerCase() == 'bitvc') {
+                $scope.logourl = "https://static.bitvc.com/images/en/logo.png";
+            }
+            return $scope.logourl;
+            
+        };
+        
         // Get Last Price by Exchange Name.
-        $scope.getLastPrice = function(exchangeName) {          
-            Tickers.query({}, function(ticks) {
+        $scope.getLastPrice = function(exchangeName) {
+            Tickers.query({
+                "timestamp" : { $gte : Math.floor(new Date().setUTCHours(0, 0, 0, 0) / 1000) },
+                "exchange" : exchangeName.toLowerCase(),
+            }, function(ticks) {
                 var lastDate = 0;
                 var thisLastPrice = 0;
                 var currentIndex = 0;
@@ -81,15 +97,16 @@ angular.module('tickers').controller('TickersController', ['$scope', '$statePara
                         currentIndex = currentIndex + 1;
                     
                         $scope.averagePrice = Number(sum / currentIndex).toFixed(2);
+                        
+                        // $scope.lastAverageDiff = "(Diff: " + (Number(tick.last) - Number(sum / currentIndex)).ToFixed(2) + ")";
                     }
                 }); // end of iterating over ticks.
             });
                
             if(!$scope.lastPrice) {
-                $scope.lastPrice = "Loading...";
-                $scope.directionClass = "fa fa-spinner fa-lg text-info";
-            }
-            
+                $scope.lastPrice = "$000.00";
+                $scope.directionClass = "fa fa-spinner fa-pulse fa-lg text-info";
+            }            
         };
         
         $scope.getDayChartData = function() {            
