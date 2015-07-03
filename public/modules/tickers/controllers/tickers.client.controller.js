@@ -106,6 +106,7 @@ angular.module('tickers').controller('TickersController', ['$scope', '$statePara
             if(!$scope.lastPrice) {
                 $scope.lastPrice = "$000.00";
                 $scope.directionClass = "fa fa-spinner fa-pulse fa-lg text-info";
+                $scope.lastUpdated = "";
             }            
         };
         

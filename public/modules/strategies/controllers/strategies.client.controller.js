@@ -1,12 +1,11 @@
 'use strict';
 
 // Strategies controller
-angular.module('strategies').controller('StrategiesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Strategies',
-	function($scope, $stateParams, $location, Authentication, Strategies) {
+angular.module('strategies').controller('StrategiesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Strategies', 'Exchanges',
+	function($scope, $stateParams, $location, Authentication, Strategies, Exchanges) {
         $scope.authentication = Authentication;
         
-        // var Exchange = angular.module('exchanges').controller('ExchangesController', ['Exchanges']);
-		
+
         // Create new Strategy
 		$scope.create = function() {
 			// Create new Strategy object

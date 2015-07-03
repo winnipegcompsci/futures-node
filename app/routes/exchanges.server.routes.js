@@ -3,7 +3,7 @@
 module.exports = function(app) {
 	var users = require('../../app/controllers/users.server.controller');
 	var exchanges = require('../../app/controllers/exchanges.server.controller');
-
+    
 	// Exchanges Routes
 	app.route('/exchanges')
 		.get(exchanges.list)
