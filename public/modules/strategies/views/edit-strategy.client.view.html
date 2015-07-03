@@ -17,16 +17,20 @@
                     <div class="form-group">
                         <label class="control-label" for="primaryExchange">Primary Exchange</label>
                         <div class="controls">
-                            <select data-ng-model="strategy.primaryExchange" ng-options="exchange.id as exchange.name for exchange in exchanges track by exchange.id"> </select>
+                            <select data-ng-model="strategy.primaryExchange" ng-options="exchange._id as exchange.name for exchange in exchanges"> 
+                               <!-- <option ng-repeat="exchange in exchanges track by exchange._id"> {{exchange.name}} </option> -->
+                            </select>
                         </div>
                     </div>
                 </div>
                 
                 <div class="columns col-lg-6">
                     <div class="form-group">
-                        <label class="control-label" for="">Insurance Exchange</label>
+                        <label class="control-label" for="insuranceExchange">Insurance Exchange</label>
                         <div class="controls">
-                            <select data-ng-model="strategy.insuranceExchange" ng-options="exchange.id as exchange.name for exchange in exchanges track by exchange.id"></select>
+                            <select data-ng-model="strategy.insuranceExchange" ng-options="exchange._id as exchange.name for exchange in exchanges">
+                                <!-- <option ng-repeat="exchange in exchanges track by exchange._id"> {{ exchange.name }} </option> -->
+                            </select>
                         </div>
                     </div>
                 </div>

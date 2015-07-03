@@ -4,7 +4,7 @@
 angular.module('tickers').controller('TickersController', ['$scope', '$stateParams', '$location', 'Authentication', 'Tickers',
 	function($scope, $stateParams, $location, Authentication, Tickers) {
 		$scope.authentication = Authentication;
-
+        
 		// Create new Ticker
 		$scope.create = function() {
 			// Create new Ticker object

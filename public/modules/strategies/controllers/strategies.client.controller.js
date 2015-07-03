@@ -1,11 +1,15 @@
 'use strict';
 
 // Strategies controller
-angular.module('strategies').controller('StrategiesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Strategies', 'Exchanges',
-	function($scope, $stateParams, $location, Authentication, Strategies, Exchanges) {
+angular.module('strategies').controller('StrategiesController', ['$scope', '$stateParams', '$location', '$http', 'Authentication', 'Strategies',
+	function($scope, $stateParams, $location, $http, Authentication, Strategies) {
         $scope.authentication = Authentication;
+                
+        $http.get("/exchanges").
+            success(function(data) {
+                $scope.exchanges = data;
+            });
         
-
         // Create new Strategy
 		$scope.create = function() {
 			// Create new Strategy object
@@ -42,12 +46,13 @@ angular.module('strategies').controller('StrategiesController', ['$scope', '$sta
 		};
 
 		// Update existing Strategy
-		$scope.update = function() {
+		$scope.update = function() {            
 			var strategy = $scope.strategy;
 
 			strategy.$update(function() {
 				$location.path('strategies/' + strategy._id);
 			}, function(errorResponse) {
+                console.log("Error:: " + errorResponse.data.message);
 				$scope.error = errorResponse.data.message;
 			});
 		};
@@ -64,8 +69,36 @@ angular.module('strategies').controller('StrategiesController', ['$scope', '$sta
 			});
             
             buildProfitChart();
-            
-            
 		};
+        
+        $scope.getPrimaryExchangeName = function() {
+            var strategy = $scope.strategy
+            var exchangeID =  strategy.primaryExchange;
+            var thisExchangeName = "N/A";
+                    
+            $scope.exchanges.forEach(function (exchange) {
+                if(exchange._id == exchangeID) {
+                    thisExchangeName = exchange.name;                    
+                }
+            });
+            
+            return thisExchangeName;
+        };
+        
+        $scope.getInsuranceExchangeName = function() {
+            var strategy = $scope.strategy;
+            var exchangeID =  strategy.insuranceExchange;
+            var thisExchangeName = "N/A";
+                    
+            $scope.exchanges.forEach(function (exchange) {
+                console.log("Secondary: " + (exchange._id == exchangeID));
+                if(exchange._id == exchangeID) {
+                    thisExchangeName = exchange.name;                    
+                }
+            });
+            
+            return thisExchangeName;
+            
+        };
 	}
 ]);

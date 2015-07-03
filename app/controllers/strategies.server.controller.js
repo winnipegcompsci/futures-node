@@ -40,13 +40,18 @@ exports.read = function(req, res) {
  * Update a Strategy
  */
 exports.update = function(req, res) {
+    console.log("Calling Update");
+    
 	var strategy = req.strategy ;
 
 	strategy = _.extend(strategy , req.body);
 
 	strategy.save(function(err) {
 		if (err) {
-			return res.status(400).send({
+            console.log("Error: " + err);
+			
+            return res.status(400).send({
+                error: err, 
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
