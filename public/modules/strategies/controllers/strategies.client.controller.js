@@ -75,12 +75,14 @@ angular.module('strategies').controller('StrategiesController', ['$scope', '$sta
             var strategy = $scope.strategy
             var exchangeID =  strategy.primaryExchange;
             var thisExchangeName = "N/A";
-                    
-            $scope.exchanges.forEach(function (exchange) {
-                if(exchange._id == exchangeID) {
-                    thisExchangeName = exchange.name;                    
-                }
-            });
+            
+            if(typeof $scope.exchanges !== 'undefined') {
+                $scope.exchanges.forEach(function (exchange) {
+                    if(exchange._id == exchangeID) {
+                        thisExchangeName = exchange.name;                    
+                    }
+                });
+            }
             
             return thisExchangeName;
         };
@@ -89,13 +91,14 @@ angular.module('strategies').controller('StrategiesController', ['$scope', '$sta
             var strategy = $scope.strategy;
             var exchangeID =  strategy.insuranceExchange;
             var thisExchangeName = "N/A";
-                    
-            $scope.exchanges.forEach(function (exchange) {
-                console.log("Secondary: " + (exchange._id == exchangeID));
-                if(exchange._id == exchangeID) {
-                    thisExchangeName = exchange.name;                    
-                }
-            });
+            
+            if(typeof $scope.exchanges !== 'undefined') {
+                $scope.exchanges.forEach(function (exchange) {
+                    if(exchange._id == exchangeID) {
+                        thisExchangeName = exchange.name;                    
+                    }
+                });
+            }
             
             return thisExchangeName;
             

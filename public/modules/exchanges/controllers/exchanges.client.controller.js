@@ -65,6 +65,15 @@ angular.module('exchanges').controller('ExchangesController', ['$scope', '$state
 			$scope.exchange = Exchanges.get({ 
 				exchangeId: $stateParams.exchangeId
 			});
-		};        
+		};
+
+        $scope.findChartData = function() {
+            console.log("Debug:: Trying to find Chart Data");
+            $scope.exchange = Exchanges.get({
+                exchangeId: $stateParams.exchangeId
+            });
+            
+            console.log("Find Chart Data For Exchange Name: " + $scope.exchange.name);
+        };
 	}
 ]);
