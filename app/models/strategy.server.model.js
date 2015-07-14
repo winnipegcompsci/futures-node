@@ -40,6 +40,10 @@ var StrategySchema = new Schema({
         type: Boolean,
         default: false,
     },
+    enabled: { 
+        type: Boolean,
+        default: false,
+    },
 	created: {
 		type: Date,
 		default: Date.now

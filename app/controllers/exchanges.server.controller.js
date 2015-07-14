@@ -13,7 +13,6 @@ var mongoose = require('mongoose'),
  * Create a Exchange
  */
 exports.create = function(req, res) {
-    console.log("Create() called");
 	var exchange = new Exchange(req.body);
 	exchange.user = req.user;
     

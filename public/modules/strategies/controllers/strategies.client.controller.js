@@ -69,8 +69,23 @@ angular.module('strategies').controller('StrategiesController', ['$scope', '$sta
 			});
             
             buildProfitChart();
-		};
+  		};
         
+        $scope.getEnabledMessage = function() {
+            var strategy = $scope.strategy;
+            
+            if(strategy.primaryExchange == "" || strategy.insuranceExchange == "") {
+                return "ERROR:: Select Exchanges";
+            }
+            
+            
+            if(strategy.enabled == true) {
+                return "<h3 class='text-success'><i class='fa fa-power-off'></i> ENABLED</h3>";
+            } else {
+                return "<h3 class='text-danger'><i class='fa fa-power-off'></i> DISABLED</h3>";
+            }
+        };
+                
         $scope.getPrimaryExchangeName = function() {
             var strategy = $scope.strategy
             var exchangeID =  strategy.primaryExchange;
@@ -103,5 +118,7 @@ angular.module('strategies').controller('StrategiesController', ['$scope', '$sta
             return thisExchangeName;
             
         };
+        
+        
 	}
 ]);

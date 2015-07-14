@@ -1,9 +1,11 @@
 'use strict';
 
 // Exchanges controller
-angular.module('exchanges').controller('ExchangesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Exchanges',
-	function($scope, $stateParams, $location, Authentication, Exchanges) {
+angular.module('exchanges').controller('ExchangesController', ['$scope', '$stateParams', '$location', '$http', 'Authentication', 'Exchanges',
+	function($scope, $stateParams, $location, $http, Authentication, Exchanges) {
 		$scope.authentication = Authentication;
+        
+        $scope.ExchangeClient = null;
         
 		// Create new Exchange
 		$scope.create = function() {
@@ -65,15 +67,27 @@ angular.module('exchanges').controller('ExchangesController', ['$scope', '$state
 			$scope.exchange = Exchanges.get({ 
 				exchangeId: $stateParams.exchangeId
 			});
+            
+            $scope.getAPIClient($scope.exchange);
 		};
 
         $scope.findChartData = function() {
-            console.log("Debug:: Trying to find Chart Data");
             $scope.exchange = Exchanges.get({
                 exchangeId: $stateParams.exchangeId
             });
-            
-            console.log("Find Chart Data For Exchange Name: " + $scope.exchange.name);
         };
+        
+        $scope.getAPIClient = function(exchange) {
+        
+            if(typeof(exchange.name) !== "undefined") {
+                console.log("Looking up API Client for: " + exchange.name);
+            
+                if(exchange.name.toLowerCase() == "okcoin") {
+                    return new OKCoin(exchange.apikey, exchange.secretkey);
+                }
+            } else {
+                return false;
+            }
+        }
 	}
 ]);

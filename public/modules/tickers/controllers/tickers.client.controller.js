@@ -72,7 +72,7 @@ angular.module('tickers').controller('TickersController', ['$scope', '$statePara
         // Get Last Price by Exchange Name.
         $scope.getLastPrice = function(exchangeName) {
             Tickers.query({
-                "timestamp" : { $gte : Math.floor(new Date().setUTCHours(0, 0, 0, 0) / 1000) },
+                "timestamp": { $gte : new Date(new Date().getTime() - (6*60*60*1000)) },
                 "exchange" : exchangeName.toLowerCase(),
             }, function(ticks) {
                 var lastDate = 0;

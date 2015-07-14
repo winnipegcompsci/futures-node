@@ -1,6 +1,7 @@
 <section data-ng-controller="StrategiesController" data-ng-init="findOne()">
 	<div class="page-header">
-		<h1 data-ng-bind="strategy.name"></h1>
+        <h1 data-ng-bind="strategy.name"></h1>
+        <h3 data-ng-bind-html="$sanitize(getEnabledMessage)"></h3>
 	</div>
     <div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == strategy.user._id))">
 		<a class="btn btn-primary" href="/#!/strategies/{{strategy._id}}/edit">
@@ -24,11 +25,6 @@
         <hr />
         <div class="row" id="profit-graph">
             <div id="profit-loss-chart"><span class="text-center">Show Profit / Loss Chart</span></div>
-            <pre>
-                :::::::DEBUG:::::: 
-                
-                <span data-ng-bind="findChartData()"></span>
-            </pre>
         </div>
         <hr />
         <div class="row"> 
@@ -45,13 +41,16 @@
                 
                 <h4> Auto Trade on Advice </h4>
                 <span data-ng-bind="strategy.autoTradeAdvice"></span>
+                
+                <h4> Enabled </h4>
+                <span data-ng-bind="strategy.enabled"></span>
             </div>
             
             <div class="columns col-lg-6">
                 <h3>Realized Profit / Loss </h3>
-                    Display Data Here
+                    NI - API Error
                 <h3>Unrealized Profit / Loss </h3>
-                    Display Data Here
+                    NI - API Error
             </div>
         </div>
         <hr />

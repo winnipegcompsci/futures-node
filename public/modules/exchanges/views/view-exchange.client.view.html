@@ -4,6 +4,15 @@
         <h4 class="text-info"> API Key: <small data-ng-bind="exchange.apikey"> </small> </h4>
         <h4 class="text-info"> Secret Key: <small data-ng-bind="exchange.secretkey"></small></h4>
 	</div>
+
+    <div class="main">
+        <pre> DEBUG </pre>
+        
+        <pre data-ng-bind="getAPIClient(exchange)"> </pre>
+    </div>
+
+
+
 	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == exchange.user._id))">
 		<a class="btn btn-primary" href="/#!/exchanges/{{exchange._id}}/edit">
 			<i class="glyphicon glyphicon-edit"></i>
@@ -12,6 +21,10 @@
 			<i class="glyphicon glyphicon-trash"></i>
 		</a>
 	</div>
+    
+
+    
+    
 	<small>
 		<em class="text-muted">
 			Added on
@@ -20,4 +33,7 @@
 			<span data-ng-bind="exchange.user.displayName"></span>
 		</em>
 	</small>
+    
+    
+
 </section>
